@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — ApexRig · Gaming hardware Bahrain</title>
+<meta name="description" content="Get in touch with ApexRig. Ask for a build quote, product advice, or visit our store in Manama, Bahrain.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="apexrig.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="sample-apexrig.html" class="logo"><span class="spark"></span><span class="a">Apex</span><span class="b">Rig</span></a>
+    <div class="nav-links">
+      <a href="sample-apexrig.html">Home</a>
+      <a href="sample-apexrig-shop.html">Shop</a>
+      <a href="sample-apexrig-about.html">About</a>
+      <a href="sample-apexrig-contact.html" class="active">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="sample-apexrig-shop.html" class="cart"><span>Cart</span><span class="count" id="cartCount">0</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero about-hero" style="padding-bottom:20px">
+  <div class="hero-glow"></div>
+  <div class="wrap" style="position:relative;z-index:1">
+    <span class="kick">◆ We're here to help</span>
+    <h1 class="disp reveal">Get in touch.</h1>
+    <p class="reveal">Need a build quote, product advice, or help with an order? Send us a message and we'll get back within a few hours.</p>
+  </div>
+</header>
+
+<section style="padding-top:24px">
+  <div class="wrap contact-grid">
+    <form class="reveal" id="contactForm" onsubmit="return apexSubmit(event)">
+      <div class="field"><label>Your name</label><input type="text" required placeholder="Ahmed Ali"></div>
+      <div class="field"><label>Email or WhatsApp</label><input type="text" required placeholder="you@email.com or +973…"></div>
+      <div class="field"><label>What do you need?</label><textarea required placeholder="e.g. I want to build a 1440p gaming PC, budget around BHD 500…"></textarea></div>
+      <button type="submit" class="btn btn-accent" style="width:100%;justify-content:center">Send message</button>
+      <p id="sent" style="display:none;color:var(--good);font-weight:600;margin-top:14px;text-align:center">✓ Thanks! This is a demo form — in a real store your message would reach the team.</p>
+    </form>
+
+    <div class="cinfo">
+      <div class="row reveal"><span class="ic">📍</span><div><b>Visit the store</b><span>Road 2401, Manama<br>Kingdom of Bahrain</span></div></div>
+      <div class="row reveal"><span class="ic">🕘</span><div><b>Opening hours</b><span>Sat – Thu · 10am – 10pm<br>Friday · 4pm – 10pm</span></div></div>
+      <div class="row reveal"><span class="ic">📞</span><div><b>Call or WhatsApp</b><span>+973 1700 0000</span></div></div>
+      <div class="row reveal"><span class="ic">✉️</span><div><b>Email</b><span>hello@apexrig.bh</span></div></div>
+      <div class="row reveal"><span class="ic">📸</span><div><b>Follow</b><span>@apexrig.bh on Instagram &amp; TikTok</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="sample-apexrig.html" class="logo" style="margin-bottom:14px"><span class="spark"></span><span class="a">Apex</span><span class="b">Rig</span></a>
+        <p style="max-width:260px">Bahrain's home for genuine gaming hardware, peripherals and custom PC builds.</p>
+      </div>
+      <div><h4>Shop</h4><a href="sample-apexrig-shop.html">Graphics cards</a><a href="sample-apexrig-shop.html">Processors</a><a href="sample-apexrig-shop.html">Peripherals</a><a href="sample-apexrig-shop.html">Monitors</a></div>
+      <div><h4>Company</h4><a href="sample-apexrig-about.html">About us</a><a href="sample-apexrig-contact.html">Contact</a><a href="sample-apexrig-about.html">Build service</a></div>
+      <div><h4>Get in touch</h4><p>Manama, Bahrain</p><p>+973 1700 0000</p><p>hello@apexrig.bh</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 ApexRig · Sample store</span><span>Genuine gear · Bahrain</span></div>
+  </div>
+</footer>
+
+<a href="index.html" class="demo-tag">◂ Sample site by FusionCraft</a>
+
+<script src="apexrig-data.js"></script>
+<script>
+  function apexSubmit(e){ e.preventDefault(); document.getElementById('sent').style.display='block'; e.target.querySelector('button').textContent='Sent ✓'; return false; }
+  apexInit();
+</script>
+</body>
+</html>
