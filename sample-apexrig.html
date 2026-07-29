@@ -46,7 +46,13 @@ nav{position:sticky;top:0;z-index:50;background:rgba(11,13,18,.82);backdrop-filt
   padding:9px 15px;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
 .cart:hover{border-color:var(--accent)}
 .cart .count{background:var(--accent);color:#fff;font-size:12px;font-weight:700;min-width:20px;height:20px;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
-@media(max-width:800px){.nav-links{display:none}}
+.burger{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;line-height:1}
+@media(max-width:800px){
+  .burger{display:block}
+  .nav-links{position:absolute;top:70px;left:0;right:0;background:#0b0d12;flex-direction:column;align-items:stretch;gap:0;padding:6px 0;display:none;border-top:1px solid var(--line);box-shadow:0 24px 40px -18px rgba(0,0,0,.8)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:15px 26px}
+}
 
 .hero{position:relative;overflow:hidden;padding:90px 0 80px}
 .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(77,139,255,.22),transparent 65%);top:-220px;right:-140px;filter:blur(30px);pointer-events:none}
@@ -175,6 +181,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);padding:54px 0 30p
     </div>
     <div class="nav-right">
       <a class="cart" onclick="showView('shop')"><span>Cart</span><span class="count" id="cartCount">0</span></a>
+      <button class="burger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
     </div>
   </div>
 </nav>
@@ -424,6 +431,7 @@ function render(id,items){var el=document.getElementById(id);if(el)el.innerHTML=
 function showView(name){
   document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('active', v.id==='view-'+name);});
   document.querySelectorAll('.nav-links a').forEach(function(a){a.classList.toggle('active', a.dataset.view===name);});
+  var nl=document.querySelector('.nav-links'); if(nl) nl.classList.remove('open');
   window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
 }
 
