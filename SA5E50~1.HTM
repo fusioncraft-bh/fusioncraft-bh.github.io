@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — ApexRig · Gaming PC parts &amp; gear</title>
+<meta name="description" content="Browse ApexRig's full range: GPUs, CPUs, keyboards, mice, headsets, monitors, memory, storage and gaming chairs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="apexrig.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="sample-apexrig.html" class="logo"><span class="spark"></span><span class="a">Apex</span><span class="b">Rig</span></a>
+    <div class="nav-links">
+      <a href="sample-apexrig.html">Home</a>
+      <a href="sample-apexrig-shop.html" class="active">Shop</a>
+      <a href="sample-apexrig-about.html">About</a>
+      <a href="sample-apexrig-contact.html">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="cart"><span>Cart</span><span class="count" id="cartCount">0</span></a>
+    </div>
+  </div>
+</nav>
+
+<section style="padding-bottom:40px">
+  <div class="wrap">
+    <p class="eyebrow">Shop</p>
+    <h2 class="disp">All products</h2>
+    <p style="color:var(--muted);margin-top:8px">Genuine gaming hardware and gear. Prices in BHD. <span id="count"></span></p>
+    <div style="max-width:420px;margin-top:22px">
+      <input id="search" type="text" placeholder="Search products, brands…"
+        style="width:100%;background:var(--bg2);border:1px solid var(--line2);border-radius:12px;padding:13px 16px;color:var(--text);font-family:inherit;font-size:15px">
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="chips" id="chips"></div>
+    <div class="pgrid" id="shopGrid"></div>
+    <p id="empty" style="display:none;color:var(--muted);text-align:center;padding:50px 0">No products match your search.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="sample-apexrig.html" class="logo" style="margin-bottom:14px"><span class="spark"></span><span class="a">Apex</span><span class="b">Rig</span></a>
+        <p style="max-width:260px">Bahrain's home for genuine gaming hardware, peripherals and custom PC builds.</p>
+      </div>
+      <div><h4>Shop</h4><a href="sample-apexrig-shop.html">Graphics cards</a><a href="sample-apexrig-shop.html">Processors</a><a href="sample-apexrig-shop.html">Peripherals</a><a href="sample-apexrig-shop.html">Monitors</a></div>
+      <div><h4>Company</h4><a href="sample-apexrig-about.html">About us</a><a href="sample-apexrig-contact.html">Contact</a><a href="sample-apexrig-about.html">Build service</a></div>
+      <div><h4>Get in touch</h4><p>Manama, Bahrain</p><p>+973 1700 0000</p><p>hello@apexrig.bh</p></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 ApexRig · Sample store</span><span>Genuine gear · Bahrain</span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><span class="dot">●</span><span id="toastMsg">Added to cart</span></div>
+<a href="index.html" class="demo-tag">◂ Sample site by FusionCraft</a>
+
+<script src="apexrig-data.js"></script>
+<script>
+  var current = 'all';
+  var query = '';
+
+  document.getElementById('chips').innerHTML = APEX_CATS.map(function(c){
+    return '<button class="chip'+(c.id==='all'?' active':'')+'" data-cat="'+c.id+'">'
+      +(c.icon?'<span>'+c.icon+'</span>':'')+c.label+'</button>';
+  }).join('');
+
+  function apply(){
+    var items = APEX_PRODUCTS.filter(function(p){
+      var okCat = current==='all' || p.cat===current;
+      var q = query.trim().toLowerCase();
+      var okQ = !q || (p.name+' '+p.brand+' '+p.spec).toLowerCase().indexOf(q)>-1;
+      return okCat && okQ;
+    });
+    apexRender('shopGrid', items);
+    document.getElementById('count').textContent = '· '+items.length+' item'+(items.length!==1?'s':'');
+    document.getElementById('empty').style.display = items.length? 'none':'block';
+  }
+
+  document.getElementById('chips').addEventListener('click', function(e){
+    var b = e.target.closest('.chip'); if(!b) return;
+    current = b.dataset.cat;
+    document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('active', c===b);});
+    apply();
+  });
+  document.getElementById('search').addEventListener('input', function(e){ query = e.target.value; apply(); });
+
+  /* deep-link from home category cards (#gpu etc.) */
+  var hash = (location.hash||'').replace('#','');
+  if(hash && APEX_CATS.some(function(c){return c.id===hash;})){
+    current = hash;
+    document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('active', c.dataset.cat===hash);});
+  }
+  apply();
+  apexInit();
+</script>
+</body>
+</html>
