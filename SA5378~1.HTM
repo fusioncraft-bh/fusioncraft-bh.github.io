@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smash &amp; Co. — Bahrain's best smash burgers</title>
+<meta name="description" content="Smash & Co. — bold, juicy smash burgers made fresh in Bahrain. Scroll to see what's inside.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#141110;--bg2:#1c1815;--char:#0d0b0a;--mustard:#f2b705;--red:#e23b2e;--cream:#f7efe2;--muted:#a99e8d;--line:#2c2622}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--cream);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit;cursor:pointer}
+  img{max-width:100%;display:block}
+  .anton{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:.01em}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 26px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;font-family:inherit;padding:14px 28px;border-radius:40px;cursor:pointer;border:none;transition:.22s}
+  .btn-mustard{background:var(--mustard);color:#241a00}
+  .btn-mustard:hover{transform:translateY(-3px) rotate(-1deg);box-shadow:0 14px 30px -10px rgba(242,183,5,.6)}
+  .btn-out{background:transparent;color:var(--cream);border:2px solid #4a4038}
+  .btn-out:hover{border-color:var(--mustard);color:var(--mustard)}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(20,17,16,.7);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:.3s}
+  nav.scr{background:rgba(13,11,10,.95);border-bottom-color:var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Anton',sans-serif;font-size:26px;letter-spacing:.02em;color:var(--cream);display:flex;align-items:center;gap:10px}
+  .logo .dot{color:var(--mustard)}
+  .logo .em{font-size:26px}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:600;color:#cdc3b4}
+  .nav-links a:hover{color:var(--mustard)}
+  .nav-links .pill{background:var(--red);color:#fff;padding:9px 20px;border-radius:30px}
+  .nav-links .pill:hover{background:#c9291d;color:#fff}
+  .burger-btn{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer}
+  @media(max-width:820px){
+    .burger-btn{display:block}
+    .nav-links{position:absolute;top:72px;left:0;right:0;background:#0d0b0a;flex-direction:column;align-items:stretch;gap:0;padding:8px 0;display:none;border-top:1px solid var(--line)}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:15px 26px}
+  }
+
+  /* ===== STAGE: scroll-exploded burger ===== */
+  .stage{height:340vh;position:relative}
+  .sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .glow{position:absolute;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(242,183,5,.16),transparent 62%);filter:blur(20px)}
+  .hero-copy{position:absolute;z-index:1;text-align:center;top:12%;left:0;right:0;pointer-events:none}
+  .hero-copy .kick{color:var(--mustard);letter-spacing:.34em;font-size:13px;font-weight:700;text-transform:uppercase}
+  .hero-copy h1{font-family:'Anton',sans-serif;font-size:clamp(52px,12vw,150px);line-height:.9;margin-top:10px;color:var(--cream);text-shadow:0 6px 0 rgba(0,0,0,.25)}
+  .hero-copy h1 span{color:var(--mustard)}
+  .scrollcue{position:absolute;bottom:6%;left:0;right:0;text-align:center;color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(8px)}}
+
+  .burger{position:relative;width:360px;height:300px;z-index:1}
+  .layer{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);will-change:transform;filter:drop-shadow(0 16px 18px rgba(0,0,0,.5))}
+  .lbl{position:absolute;left:50%;white-space:nowrap;font-weight:700;font-size:16px;color:var(--cream);opacity:0;transition:opacity .3s}
+  .lbl b{color:var(--mustard)}
+  .lbl::before{content:"";position:absolute;top:50%;width:40px;height:2px;background:var(--mustard);left:-50px}
+  .bun-top{width:300px;height:150px;background:radial-gradient(150px 105px at 50% 135%,#f2c179,#e0a84f 55%,#c58734 100%);border-radius:150px 150px 46px 46px;box-shadow:inset 0 -14px 24px rgba(120,70,20,.35),inset 0 12px 22px rgba(255,236,192,.55)}
+  .seeds span{position:absolute;width:16px;height:9px;background:#f7ecd2;border-radius:50%;box-shadow:0 1px 1px rgba(0,0,0,.18)}
+  .lettuce{width:338px;height:44px;background:linear-gradient(#8ccd50,#5fa233);border-radius:26px;clip-path:polygon(0 0,100% 0,100% 55%,94% 100%,86% 58%,78% 100%,70% 58%,62% 100%,54% 58%,46% 100%,38% 58%,30% 100%,22% 58%,14% 100%,6% 58%,0 100%);box-shadow:inset 0 4px 7px rgba(255,255,255,.28)}
+  .tomato{width:300px;height:38px;background:radial-gradient(circle at 30% 40%,#f2664c,#cf3f28);border-radius:24px;box-shadow:inset 0 -5px 8px rgba(120,20,10,.35),inset 0 4px 6px rgba(255,175,155,.45)}
+  .cheese{width:324px;height:40px;background:linear-gradient(#ffd24a,#eda50f);border-radius:10px;clip-path:polygon(0 0,100% 0,100% 58%,90% 100%,80% 60%,68% 100%,56% 60%,44% 100%,32% 60%,20% 100%,10% 60%,0 68%);box-shadow:inset 0 4px 7px rgba(255,255,255,.4)}
+  .patty{width:314px;height:64px;background:radial-gradient(180px 72px at 50% 24%,#7d4e2a,#472a16 78%);border-radius:44px;box-shadow:inset 0 7px 12px rgba(255,185,125,.16),inset 0 -10px 16px rgba(0,0,0,.5)}
+  .bun-bot{width:296px;height:66px;background:linear-gradient(#e2aa50,#c2853a);border-radius:18px 18px 66px 66px;box-shadow:inset 0 8px 16px rgba(255,232,192,.38)}
+  @media(max-width:560px){.burger{transform:scale(.74)}.lbl{font-size:13px}.lbl::before{width:26px;left:-34px}}
+
+  section{padding:96px 0;position:relative}
+  .sec-head{text-align:center;max-width:660px;margin:0 auto 48px}
+  .eyebrow{color:var(--mustard);letter-spacing:.2em;text-transform:uppercase;font-size:13px;font-weight:700}
+  h2{font-family:'Anton',sans-serif;font-size:clamp(34px,6vw,64px);line-height:.98;margin-top:12px}
+  .lead{color:var(--muted);font-size:17px;margin-top:14px}
+
+  .marquee{background:var(--red);color:#fff;overflow:hidden;padding:16px 0;transform:rotate(-1.5deg);margin:0 -20px}
+  .mtrack{display:flex;gap:40px;width:max-content;animation:sc 18s linear infinite;font-family:'Anton',sans-serif;font-size:30px;letter-spacing:.04em}
+  .mtrack span{display:flex;gap:40px;white-space:nowrap}
+  .mtrack span::after{content:"🍔";}
+  @keyframes sc{to{transform:translateX(-50%)}}
+
+  .menu{background:var(--bg2)}
+  .mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.mgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.mgrid{grid-template-columns:1fr}}
+  .mcard{background:var(--char);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.3s}
+  .mcard:hover{transform:translateY(-8px) rotate(.6deg);border-color:var(--mustard)}
+  .mcard .top{height:170px;display:flex;align-items:center;justify-content:center;font-size:90px;background:radial-gradient(200px circle at 50% 30%,rgba(242,183,5,.14),transparent 60%)}
+  .mcard:hover .top{font-size:100px}
+  .mcard .b{padding:20px 22px}
+  .mcard h3{font-family:'Anton',sans-serif;font-size:24px;display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .mcard h3 span{font-family:'Inter';color:var(--mustard);font-size:19px;font-weight:800}
+  .mcard p{color:var(--muted);font-size:14px;margin-top:4px}
+
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  @media(max-width:860px){.story{grid-template-columns:1fr;gap:30px}}
+  .story .imgwrap{border-radius:18px;overflow:hidden;height:440px}
+  .story img{width:100%;height:100%;object-fit:cover}
+  .story h2{margin-bottom:16px}
+  .story p{color:var(--muted);font-size:16px;margin-bottom:14px}
+  .stats{display:flex;gap:40px;margin-top:24px}
+  .stats .n{font-family:'Anton',sans-serif;font-size:40px;color:var(--mustard)}
+  .stats .l{color:var(--muted);font-size:13px}
+
+  .visit{background:var(--red);color:#fff;text-align:center;border-radius:22px;padding:64px 30px;position:relative;overflow:hidden}
+  .visit h2{color:#fff}
+  .visit .info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:26px 0}
+  .visit .info b{font-family:'Anton',sans-serif;display:block;font-size:20px}
+  .visit .info span{color:#ffd9d4;font-size:14px}
+
+  footer{background:var(--char);padding:50px 0 28px;text-align:center;border-top:1px solid var(--line)}
+  .foot-logo{font-family:'Anton',sans-serif;font-size:30px;margin-bottom:8px}
+  .foot-logo .dot{color:var(--mustard)}
+  footer p{color:var(--muted);font-size:14px}
+
+  .fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 12px 30px -8px rgba(37,211,102,.6)}
+  .demo-tag{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--char);border:1px solid var(--mustard);color:var(--mustard);font-size:12px;font-weight:700;padding:8px 14px;border-radius:20px}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+  body.ar,.ar .anton,.ar h1,.ar h2,.ar .logo,.ar .mcard h3,.ar .foot-logo,.ar .mtrack,.ar .btn,.ar .nav-links,.ar .lead,.ar p,.ar .lbl{font-family:'Tajawal',sans-serif}
+  .ar .lbl{direction:rtl}
+  #langBtn{background:none;border:1px solid #4a4038;color:#fff;font-weight:700;border-radius:20px;padding:6px 13px;font-family:inherit;cursor:pointer}
+  #langBtn:hover{border-color:var(--mustard);color:var(--mustard)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span class="em">🍔</span>SMASH<span class="dot"> &amp; CO.</span></a>
+    <div class="nav-links" id="menu">
+      <a onclick="closeM()" href="#menu-sec">Menu</a>
+      <a onclick="closeM()" href="#story">Story</a>
+      <a onclick="closeM()" href="#visit">Visit</a>
+      <a class="pill" onclick="closeM()" href="#visit">Order now</a>
+    </div>
+    <button id="langBtn" onclick="toggleLang()">ع</button>
+    <button class="burger-btn" onclick="document.getElementById('menu').classList.toggle('open')" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<div id="top"></div>
+<!-- ===== SCROLL-EXPLODED BURGER ===== -->
+<section class="stage" id="stage">
+  <div class="sticky">
+    <div class="glow"></div>
+    <div class="hero-copy" id="heroCopy">
+      <div class="kick">Bahrain · Smash burgers</div>
+      <h1>THE BEST<br><span>SMASH</span> IN TOWN</h1>
+    </div>
+    <div class="burger" id="burger">
+      <div class="layer bun-top" data-i="0"><div class="seeds"><span style="left:118px;top:44px"></span><span style="left:158px;top:28px;transform:rotate(20deg)"></span><span style="left:96px;top:66px;transform:rotate(-15deg)"></span><span style="left:192px;top:58px;transform:rotate(10deg)"></span><span style="left:143px;top:74px"></span></div></div>
+      <div class="layer lettuce" data-i="1"></div>
+      <div class="layer tomato" data-i="2"></div>
+      <div class="layer cheese" data-i="3"></div>
+      <div class="layer patty" data-i="4"></div>
+      <div class="layer bun-bot" data-i="5"></div>
+    </div>
+    <div class="lbl" id="l0" style="top:22%"><b>Brioche</b> bun, toasted</div>
+    <div class="lbl" id="l1" style="top:34%">Crisp <b>lettuce</b></div>
+    <div class="lbl" id="l2" style="top:45%">Vine <b>tomato</b></div>
+    <div class="lbl" id="l3" style="top:56%">Aged <b>cheddar</b></div>
+    <div class="lbl" id="l4" style="top:67%">Smashed <b>Wagyu</b> patty</div>
+    <div class="lbl" id="l5" style="top:79%">Buttered <b>base</b></div>
+    <div class="scrollcue">Scroll to open it ↓</div>
+  </div>
+</section>
+
+<div class="marquee"><div class="mtrack"><span>JUICY&nbsp; SMASHED&nbsp; FRESH&nbsp; BOLD&nbsp; STACKED&nbsp;</span><span>JUICY&nbsp; SMASHED&nbsp; FRESH&nbsp; BOLD&nbsp; STACKED&nbsp;</span></div></div>
+
+<!-- MENU -->
+<section class="menu" id="menu-sec">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow">Our menu</div><h2>Stacked to perfection</h2><p class="lead">Fresh-ground beef, smashed on the flat-top, in soft brioche. Prices in BHD.</p></div>
+    <div class="mgrid">
+      <div class="mcard reveal"><div class="top">🍔</div><div class="b"><h3>The Classic Smash<span>2.900</span></h3><p>Single patty, cheddar, pickles, house sauce.</p></div></div>
+      <div class="mcard reveal"><div class="top">🍔</div><div class="b"><h3>Double Trouble<span>3.900</span></h3><p>Two smashed patties, double cheese, grilled onions.</p></div></div>
+      <div class="mcard reveal"><div class="top">🥓</div><div class="b"><h3>Bacon Beast<span>4.200</span></h3><p>Smoked bacon, cheddar, crispy onions, BBQ.</p></div></div>
+      <div class="mcard reveal"><div class="top">🔥</div><div class="b"><h3>Firecracker<span>4.000</span></h3><p>Jalapeño, pepper jack, hot honey, spicy mayo.</p></div></div>
+      <div class="mcard reveal"><div class="top">🍗</div><div class="b"><h3>Crispy Chicken<span>3.600</span></h3><p>Buttermilk-fried chicken, slaw, pickles.</p></div></div>
+      <div class="mcard reveal"><div class="top">🌱</div><div class="b"><h3>Green Machine<span>3.400</span></h3><p>Plant-based patty, vegan cheese, all the trimmings.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="wrap story">
+    <div class="reveal">
+      <div class="eyebrow">Our story</div>
+      <h2>Born on a flat-top.</h2>
+      <p>Smash &amp; Co. started with one belief: a burger should be loud, juicy, and honest. We grind our beef fresh, smash it thin for those crispy edges, and stack it high.</p>
+      <p>No shortcuts, no frozen patties — just Bahrain's boldest burgers, made to order.</p>
+      <div class="stats">
+        <div><div class="n">100%</div><div class="l">Fresh beef</div></div>
+        <div><div class="n">60s</div><div class="l">On the flat-top</div></div>
+        <div><div class="n">4.9★</div><div class="l">Rated by locals</div></div>
+      </div>
+    </div>
+    <div class="imgwrap reveal"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80" alt="Smash burger"></div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="wrap">
+    <div class="visit reveal">
+      <div class="eyebrow" style="color:#ffe08a">Come get one</div>
+      <h2 class="anton">Hungry yet?</h2>
+      <div class="info">
+        <div><b>Adliya, Manama</b><span>Block 338, Bahrain</span></div>
+        <div><b>Daily · 12pm–1am</b><span>Dine-in &amp; delivery</span></div>
+        <div><b>+973 1700 0000</b><span>Order on WhatsApp</span></div>
+      </div>
+      <a class="btn btn-mustard" href="https://wa.me/97333801005?text=Hi%20FusionCraft%2C%20I%20saw%20this%20sample%20and%20want%20a%20website%20like%20it." target="_blank" rel="noopener">🍔 Order now</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">SMASH<span class="dot"> &amp; CO.</span></div>
+  <p>Bahrain's best smash burgers · Adliya, Manama · © 2026</p>
+</footer>
+
+<a href="https://wa.me/97333801005?text=Hi%20FusionCraft%2C%20I%20saw%20this%20sample%20and%20want%20a%20website%20like%20it." class="fab" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+<a href="index.html" class="demo-tag">◂ Sample site by FusionCraft</a>
+
+<script>
+  var nav=document.getElementById('nav');
+  function closeM(){document.getElementById('menu').classList.remove('open');}
+  var stage=document.getElementById('stage');
+  var layers=[].slice.call(document.querySelectorAll('#burger .layer'));
+  var lbls=[0,1,2,3,4,5].map(function(i){return document.getElementById('l'+i);});
+  var heroCopy=document.getElementById('heroCopy');
+  var GAP=118, CENTER=2.5;
+  function onScroll(){
+    nav.classList.toggle('scr', scrollY>20);
+    var rect=stage.getBoundingClientRect();
+    var total=stage.offsetHeight-window.innerHeight;
+    var p=Math.min(1,Math.max(0,(-rect.top)/total)); // 0..1 through the stage
+    // ease
+    var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    layers.forEach(function(el,i){
+      var spread=(i-CENTER)*GAP*e;
+      var rot=(i-CENTER)*1.4*e;
+      el.style.transform='translate(-50%,-50%) translateY('+spread+'px) rotate('+rot+'deg)';
+    });
+    lbls.forEach(function(el){ el.style.opacity = e>.35?1:0; el.style.transform='translateX(180px)'; });
+    heroCopy.style.opacity = Math.max(0, 1-e*1.6);
+    heroCopy.style.transform='translateY('+(-e*60)+'px)';
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+<script>
+var AR={
+ nav:['المنيو','قصتنا','زورونا','اطلب الآن'],
+ kick:'البحرين · سماش برجر',
+ h1:'أفضل سماش<br><span>برجر</span> في البحرين',
+ lbls:['خبز <b>بريوش</b> محمّص','خس <b>مقرمش</b>','<b>طماطم</b> طازجة','<b>شيدر</b> معتّق','<b>لحم واغيو</b> مسحوق','قاعدة <b>مزبّدة</b>'],
+ cue:'مرّر لتركّب البرجر ↓',
+ mEye:'منيونا', mH2:'مرصوص باحتراف', mLead:'لحم طازج مسحوق على الجريل، في خبز بريوش طري. الأسعار بالدينار.',
+ mNames:['السماش الكلاسيكي','دبل ترابل','بيكن بيست','فايركراكر','دجاج مقرمش','جرين ماشين'],
+ mDesc:['قطعة لحم، شيدر، مخلل، وصوص البيت.','قطعتين لحم مسحوق، جبن دبل، بصل مشوي.','بيكن مدخّن، شيدر، بصل مقرمش، باربكيو.','هالبينو، بيبر جاك، عسل حار، مايو حار.','دجاج مقلي بالبترميلك، سلو، مخلل.','قطعة نباتية، جبن نباتي، وكل الإضافات.'],
+ sEye:'قصتنا', sH2:'وُلد على الجريل.',
+ sP:['بدأنا سماش آند كو بفكرة وحدة: البرجر لازم يكون جريء، غني، وصادق. نطحن اللحم طازج ونسحقه رقيق عشان الأطراف المقرمشة، ونرصّه عالي.','بدون اختصارات، بدون لحم مجمّد — بس أجرأ برجر في البحرين، يتسوّى بالطلب.'],
+ sStats:['لحم طازج','على الجريل','تقييم محلي'],
+ vEye:'تعال خذ لك وحدة', vH2:'جوعان؟',
+ vInfoB:['العدلية، المنامة','يومياً · ١٢ ظهراً–١ ليلاً','٩٧٣ ١٧٠٠٠٠٠٠+'],
+ vInfoS:['مجمّع ٣٣٨، البحرين','تناول بالمحل وتوصيل','اطلب على واتساب'],
+ vBtn:'🍔 اطلب الآن',
+ foot:'أفضل سماش برجر في البحرين · العدلية، المنامة · © 2026'
+};
+var arOn=false, EN=null;
+function grab(){return {
+ nav:[].map.call(document.querySelectorAll('#menu a'),function(a){return a.innerHTML;}),
+ kick:document.querySelector('#heroCopy .kick').innerHTML,
+ h1:document.querySelector('#heroCopy h1').innerHTML,
+ lbls:[0,1,2,3,4,5].map(function(i){return document.getElementById('l'+i).innerHTML;}),
+ cue:document.querySelector('.scrollcue').innerHTML,
+ mEye:document.querySelector('#menu-sec .eyebrow').innerHTML, mH2:document.querySelector('#menu-sec h2').innerHTML, mLead:document.querySelector('#menu-sec .lead').innerHTML,
+ mNames:[].map.call(document.querySelectorAll('.mcard h3'),function(h){return h.childNodes[0].nodeValue;}),
+ mDesc:[].map.call(document.querySelectorAll('.mcard p'),function(p){return p.innerHTML;}),
+ sEye:document.querySelector('#story .eyebrow').innerHTML, sH2:document.querySelector('#story h2').innerHTML,
+ sP:[].map.call(document.querySelectorAll('#story .reveal p'),function(p){return p.innerHTML;}),
+ sStats:[].map.call(document.querySelectorAll('.stats .l'),function(x){return x.innerHTML;}),
+ vEye:document.querySelector('#visit .eyebrow').innerHTML, vH2:document.querySelector('#visit h2').innerHTML,
+ vInfoB:[].map.call(document.querySelectorAll('.visit .info b'),function(x){return x.innerHTML;}),
+ vInfoS:[].map.call(document.querySelectorAll('.visit .info span'),function(x){return x.innerHTML;}),
+ vBtn:document.querySelector('#visit .btn').innerHTML,
+ foot:document.querySelector('footer p').innerHTML
+};}
+function apply(D){
+ var n=document.querySelectorAll('#menu a');D.nav.forEach(function(v,i){if(n[i])n[i].innerHTML=v;});
+ document.querySelector('#heroCopy .kick').innerHTML=D.kick;
+ document.querySelector('#heroCopy h1').innerHTML=D.h1;
+ D.lbls.forEach(function(v,i){document.getElementById('l'+i).innerHTML=v;});
+ document.querySelector('.scrollcue').innerHTML=D.cue;
+ document.querySelector('#menu-sec .eyebrow').innerHTML=D.mEye;
+ document.querySelector('#menu-sec h2').innerHTML=D.mH2;
+ document.querySelector('#menu-sec .lead').innerHTML=D.mLead;
+ var hs=document.querySelectorAll('.mcard h3');D.mNames.forEach(function(v,i){if(hs[i])hs[i].childNodes[0].nodeValue=v+' ';});
+ var ps=document.querySelectorAll('.mcard p');D.mDesc.forEach(function(v,i){if(ps[i])ps[i].innerHTML=v;});
+ document.querySelector('#story .eyebrow').innerHTML=D.sEye;
+ document.querySelector('#story h2').innerHTML=D.sH2;
+ var sp=document.querySelectorAll('#story .reveal p');D.sP.forEach(function(v,i){if(sp[i])sp[i].innerHTML=v;});
+ var sl=document.querySelectorAll('.stats .l');D.sStats.forEach(function(v,i){if(sl[i])sl[i].innerHTML=v;});
+ document.querySelector('#visit .eyebrow').innerHTML=D.vEye;
+ document.querySelector('#visit h2').innerHTML=D.vH2;
+ var vb=document.querySelectorAll('.visit .info b');D.vInfoB.forEach(function(v,i){if(vb[i])vb[i].innerHTML=v;});
+ var vs=document.querySelectorAll('.visit .info span');D.vInfoS.forEach(function(v,i){if(vs[i])vs[i].innerHTML=v;});
+ document.querySelector('#visit .btn').innerHTML=D.vBtn;
+ document.querySelector('footer p').innerHTML=D.foot;
+}
+function toggleLang(){
+ if(!EN) EN=grab();
+ arOn=!arOn;
+ document.documentElement.setAttribute('dir', arOn?'rtl':'ltr');
+ document.body.classList.toggle('ar', arOn);
+ document.getElementById('langBtn').textContent = arOn?'EN':'ع';
+ apply(arOn?AR:EN);
+}
+</script>
+</body>
+</html>

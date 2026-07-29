@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oud Woodworks — Bespoke Carpentry · Bahrain</title>
+<meta name="description" content="Oud Woodworks — bespoke carpentry in Bahrain. Custom tables, doors, kitchens, wardrobes, TV units and staircases.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--wood-dark:#241811;--wood:#3a2a1c;--tan:#b5854f;--tan2:#caa06a;--bg:#f6f1ea;--card:#fffdfb;--line:#e7ddd0;--ink:#2a2118;--muted:#7a6b58}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{text-decoration:none;color:inherit;cursor:pointer}
+  img{max-width:100%;display:block}
+  .serif{font-family:'Cormorant Garamond',serif}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .view{display:none}.view.active{display:block}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:15px;font-family:inherit;padding:14px 28px;border-radius:6px;border:none;cursor:pointer;transition:.25s}
+  .btn-tan{background:var(--tan);color:#241811}
+  .btn-tan:hover{background:var(--tan2);transform:translateY(-2px)}
+  .btn-out{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+  .btn-out:hover{background:#fff;color:var(--wood)}
+  .btn-dark{background:var(--wood);color:#fff}
+  .btn-dark:hover{background:#4d3826}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(36,24,17,.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:76px;color:#fff}
+  .logo{display:flex;align-items:center;gap:12px;font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:700;letter-spacing:.02em}
+  .logo .mk{width:40px;height:40px;border:2px solid var(--tan);color:var(--tan);display:flex;align-items:center;justify-content:center;font-size:20px;border-radius:3px}
+  .logo b{color:var(--tan)}
+  .nav-links{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;color:#d7cbbc}
+  .nav-links a:hover,.nav-links a.active{color:var(--tan2)}
+  .burger{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;line-height:1}
+  @media(max-width:860px){
+    .burger{display:block}
+    .nav-links{position:absolute;top:76px;left:0;right:0;background:#241811;flex-direction:column;align-items:stretch;gap:0;padding:6px 0;display:none;box-shadow:0 24px 40px -18px rgba(0,0,0,.7)}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:15px 28px}
+    .nav-links .navcta{margin:10px 28px;justify-content:center}
+  }
+
+  .hero{position:relative;min-height:82vh;display:flex;align-items:center;color:#fff;
+    background:linear-gradient(90deg,rgba(28,18,12,.82),rgba(28,18,12,.4)),url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1600&q=80') center/cover}
+  .hero .wrap{position:relative;z-index:1}
+  .kick{color:var(--tan2);letter-spacing:.28em;text-transform:uppercase;font-size:13px;font-weight:600;margin-bottom:20px}
+  .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,6.5vw,76px);font-weight:700;line-height:1.05;max-width:820px}
+  .hero p{font-size:19px;color:#e3d9cc;max-width:520px;margin:22px 0 34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+
+  .stats{background:var(--wood)}
+  .stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:44px 0;color:#fff}
+  @media(max-width:760px){.stats-in{grid-template-columns:1fr 1fr;gap:32px}}
+  .stat{text-align:center}
+  .stat .n{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;color:var(--tan2)}
+  .stat .l{color:#c3b6a5;font-size:14px;margin-top:2px}
+
+  section{padding:88px 0}
+  .sec-head{text-align:center;max-width:660px;margin:0 auto 52px}
+  .eyebrow{color:var(--tan);letter-spacing:.2em;text-transform:uppercase;font-size:13px;font-weight:700}
+  h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4.6vw,50px);font-weight:700;line-height:1.1;margin-top:8px}
+  .lead{color:var(--muted);font-size:17px;margin-top:14px}
+
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:960px){.pgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+  .pcard{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.32s;cursor:pointer}
+  .pcard:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(58,42,28,.5)}
+  .pcard .ph{height:250px;position:relative;overflow:hidden;background:#e6dccd}
+  .pcard .ph img{width:100%;height:100%;object-fit:cover;transition:.6s}
+  .pcard:hover .ph img{transform:scale(1.07)}
+  .pcard .pb{padding:22px 24px}
+  .pcard .pb h3{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:700;margin-bottom:4px}
+  .pcard .pb p{color:var(--muted);font-size:14px}
+  .pcard .pb .meta{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--ink);font-weight:600}
+  .pcard .pb .meta span{color:var(--muted);font-weight:500}
+  .pcard .view-link{color:var(--wood);font-weight:700;font-size:14px;margin-top:12px;display:inline-flex;gap:6px;align-items:center}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{text-align:center;padding:34px 24px;background:var(--card);border:1px solid var(--line);border-radius:10px;position:relative}
+  .step .no{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;color:var(--tan)}
+  .step h3{font-family:'Cormorant Garamond',serif;font-size:24px;margin:2px 0 6px}
+  .step p{color:var(--muted);font-size:15px}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  @media(max-width:860px){.split{grid-template-columns:1fr;gap:34px}}
+  .split img{width:100%;height:470px;object-fit:cover;border-radius:10px}
+  .why{background:var(--wood);color:#fff}
+  .why h2{color:#fff}
+  .whygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
+  @media(max-width:860px){.whygrid{grid-template-columns:1fr}}
+  .whycard{border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:30px}
+  .whycard .ic{font-size:34px;color:var(--tan2);margin-bottom:12px}
+  .whycard h3{font-family:'Cormorant Garamond',serif;font-size:23px;margin-bottom:6px}
+  .whycard p{color:#c3b6a5;font-size:15px}
+
+  .band{background:linear-gradient(90deg,var(--wood),#4d3826);color:#fff;text-align:center;border-radius:14px;padding:60px 30px}
+  .band h2{color:#fff;margin-bottom:10px}
+  .band p{color:#d7cbbc;margin-bottom:26px}
+
+  .detail-hero{height:60vh;min-height:420px;position:relative;display:flex;align-items:flex-end;color:#fff;background-size:cover;background-position:center}
+  .detail-hero .wrap{position:relative;z-index:1;padding-bottom:40px}
+  .back{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:14px;background:rgba(0,0,0,.32);padding:9px 16px;border-radius:6px;position:absolute;top:26px;left:28px;z-index:2}
+  .detail-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,60px);font-weight:700}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:44px 0}
+  @media(max-width:760px){.facts{grid-template-columns:1fr 1fr}}
+  .fact{background:#fff;padding:24px}
+  .fact .l{color:var(--muted);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+  .fact .v{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin-top:4px}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}}
+  .gallery img{height:240px;width:100%;object-fit:cover;border-radius:8px;cursor:pointer;transition:.3s}
+  .gallery img:hover{transform:scale(1.02);filter:brightness(1.05)}
+  .gallery img.big{grid-column:span 2;grid-row:span 2;height:auto}
+
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;gap:30px}}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:7px}
+  .field input,.field textarea{width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;padding:13px 15px;font-family:inherit;font-size:15px;transition:.2s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--tan);box-shadow:0 0 0 3px rgba(181,133,79,.18)}
+  .field textarea{min-height:130px;resize:vertical}
+  .cinfo .row{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line)}
+  .cinfo .ic{width:44px;height:44px;flex:none;border-radius:8px;background:var(--wood);color:var(--tan2);display:flex;align-items:center;justify-content:center;font-size:20px}
+  .cinfo b{display:block;font-size:15px}
+  .cinfo span{color:var(--muted);font-size:14px}
+
+  footer{background:var(--wood-dark);color:#c3b6a5;padding:56px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
+  footer h4{color:#fff;font-family:'Cormorant Garamond',serif;font-size:19px;margin-bottom:14px}
+  footer a,footer p{display:block;color:#bdae9c;font-size:14px;margin-bottom:9px}
+  footer a:hover{color:var(--tan2)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);margin-top:34px;padding-top:22px;text-align:center;font-size:13px;color:#8a7a67}
+
+  .fab{position:fixed;right:22px;bottom:22px;z-index:60;width:60px;height:60px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 12px 30px -8px rgba(37,211,102,.6)}
+  .demo-tag{position:fixed;left:16px;bottom:16px;z-index:60;background:var(--wood);border:1px solid var(--tan);color:var(--tan2);font-size:12px;font-weight:600;padding:8px 14px;border-radius:20px}
+  .lightbox{position:fixed;inset:0;background:rgba(20,14,9,.93);z-index:80;display:none;align-items:center;justify-content:center;padding:30px}
+  .lightbox.show{display:flex}
+  .lightbox img{max-width:92%;max-height:88%;border-radius:8px}
+  .lightbox .x{position:absolute;top:22px;right:28px;color:#fff;font-size:34px;cursor:pointer;font-weight:300}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .hero .kick{opacity:0;animation:fadeUp .7s ease forwards .1s}
+  .hero h1{opacity:0;animation:fadeUp .8s ease forwards .25s}
+  .hero p{opacity:0;animation:fadeUp .8s ease forwards .45s}
+  .hero .hero-cta{opacity:0;animation:fadeUp .8s ease forwards .6s}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" onclick="show('home')"><span class="mk">O</span><span>Oud<b> Woodworks</b></span></a>
+    <div class="nav-links">
+      <a data-v="home" class="active" onclick="show('home')">Home</a>
+      <a data-v="about" onclick="show('about')">About</a>
+      <a data-v="work" onclick="show('work')">Our Work</a>
+      <a data-v="contact" onclick="show('contact')">Contact</a>
+      <a class="btn btn-tan navcta" onclick="show('contact')" style="padding:10px 20px">Get a quote</a>
+    </div>
+    <button class="burger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="view active" id="v-home">
+  <header class="hero">
+    <div class="wrap">
+      <div class="kick">Bespoke carpentry · Bahrain</div>
+      <h1 class="serif">Handcrafted wood,<br>made to last.</h1>
+      <p>Oud Woodworks designs and builds custom furniture and fittings for homes across Bahrain — tables, doors, kitchens and more, crafted by hand in our workshop.</p>
+      <div class="hero-cta">
+        <a class="btn btn-tan" onclick="show('work')">See our work</a>
+        <a class="btn btn-out" onclick="show('contact')">Get a quote</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats"><div class="wrap stats-in">
+    <div class="stat"><div class="n">20+</div><div class="l">Years of craft</div></div>
+    <div class="stat"><div class="n">2,000+</div><div class="l">Pieces crafted</div></div>
+    <div class="stat"><div class="n">900+</div><div class="l">Happy homes</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">Solid wood</div></div>
+  </div></div>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">What we make</div><h2 class="serif">Featured pieces</h2><p class="lead">A glimpse of the custom woodwork we craft for Bahraini homes.</p></div>
+      <div class="pgrid" id="featGrid"></div>
+      <div style="text-align:center;margin-top:44px"><a class="btn btn-dark" onclick="show('work')">Browse all our work</a></div>
+    </div>
+  </section>
+
+  <section style="background:#efe6d9;padding-top:70px">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">How we work</div><h2 class="serif">From idea to installed</h2></div>
+      <div class="steps">
+        <div class="step"><div class="no">01</div><h3 class="serif">Design</h3><p>We sketch and 3D-model your piece, agree on wood, finish and size.</p></div>
+        <div class="step"><div class="no">02</div><h3 class="serif">Craft</h3><p>Our carpenters build it by hand in our Bahrain workshop.</p></div>
+        <div class="step"><div class="no">03</div><h3 class="serif">Install</h3><p>We deliver and fit it perfectly in your home.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Why Oud</div><h2 class="serif">Craft you can feel</h2></div>
+      <div class="whygrid">
+        <div class="whycard"><div class="ic">✦</div><h3 class="serif">Real, solid wood</h3><p>Oak, walnut and ash — natural materials, built to age beautifully.</p></div>
+        <div class="whycard"><div class="ic">◆</div><h3 class="serif">Fully custom</h3><p>Any size, any finish — made to fit your space exactly.</p></div>
+        <div class="whycard"><div class="ic">❖</div><h3 class="serif">One-year warranty</h3><p>We stand behind every joint, hinge and finish we deliver.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section><div class="wrap"><div class="band">
+    <div class="eyebrow" style="color:var(--tan2)">Let's build</div>
+    <h2 class="serif">Have something in mind?</h2>
+    <p>Send us your idea and we'll turn it into a quote.</p>
+    <a class="btn btn-tan" onclick="show('contact')">Get a free quote</a>
+  </div></div></section>
+</div>
+
+<!-- ABOUT -->
+<div class="view" id="v-about">
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">About us</div><h2 class="serif">Two decades of woodworking</h2></div>
+      <div class="split">
+        <img src="https://images.unsplash.com/photo-1601058268499-e52dc0f2f9f7?auto=format&fit=crop&w=1000&q=80" alt="Workshop">
+        <div>
+          <p style="color:var(--muted);font-size:16px;margin-bottom:14px">Oud Woodworks started as a small family workshop in Bahrain and grew through one thing: honest craftsmanship. Two decades on, we still build every piece by hand.</p>
+          <p style="color:var(--muted);font-size:16px">From a single dining table to a full kitchen fit-out, we treat every project as our own — choosing the right wood, perfecting the joinery, and finishing it to last a lifetime.</p>
+          <div style="display:flex;gap:40px;margin-top:26px">
+            <div><div class="serif" style="font-size:36px;font-weight:700;color:var(--wood)">20+</div><div style="color:var(--muted);font-size:14px">Years</div></div>
+            <div><div class="serif" style="font-size:36px;font-weight:700;color:var(--wood)">2,000+</div><div style="color:var(--muted);font-size:14px">Pieces</div></div>
+            <div><div class="serif" style="font-size:36px;font-weight:700;color:var(--wood)">100%</div><div style="color:var(--muted);font-size:14px">Handmade</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="why" style="padding-top:0"><div class="wrap" style="padding-top:70px">
+    <div class="sec-head"><div class="eyebrow">Our materials</div><h2 class="serif">Only the good stuff</h2></div>
+    <div class="whygrid">
+      <div class="whycard"><div class="ic">🪵</div><h3 class="serif">Oak &amp; walnut</h3><p>Premium hardwoods for tables, doors and staircases.</p></div>
+      <div class="whycard"><div class="ic">🛠️</div><h3 class="serif">Quality fittings</h3><p>Soft-close hinges, solid handles and durable hardware.</p></div>
+      <div class="whycard"><div class="ic">🎨</div><h3 class="serif">Fine finishes</h3><p>Natural oils, matte lacquer or hand-stained to your taste.</p></div>
+    </div>
+  </div></section>
+  <section><div class="wrap"><div class="band">
+    <h2 class="serif">Let's craft yours</h2><p>Tell us what you need and we'll make it real.</p>
+    <a class="btn btn-tan" onclick="show('contact')">Get a quote</a>
+  </div></div></section>
+</div>
+
+<!-- OUR WORK -->
+<div class="view" id="v-work">
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Our work</div><h2 class="serif">What we craft</h2><p class="lead">Click any category to see details and a photo gallery.</p></div>
+      <div class="pgrid" id="allGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- DETAIL -->
+<div class="view" id="v-detail"></div>
+
+<!-- CONTACT -->
+<div class="view" id="v-contact">
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><div class="eyebrow">Contact</div><h2 class="serif">Get a free quote</h2><p class="lead">Tell us about your piece — size, wood and finish — and we'll get back with a price.</p></div>
+      <div class="contact-grid">
+        <form onsubmit="return sent(event)">
+          <div class="field"><label>Full name</label><input required placeholder="Your name"></div>
+          <div class="field"><label>Phone / WhatsApp</label><input required placeholder="+973 …"></div>
+          <div class="field"><label>What do you need?</label><input placeholder="e.g. A 6-seat oak dining table"></div>
+          <div class="field"><label>Details</label><textarea required placeholder="Size, wood, finish, or attach a photo when you message us…"></textarea></div>
+          <button class="btn btn-dark" type="submit" style="width:100%;justify-content:center">Send request</button>
+          <p id="ok" style="display:none;color:#2f7d3a;font-weight:600;margin-top:14px;text-align:center">✓ Thank you — this is a demo form. In a live site your request would reach the workshop.</p>
+        </form>
+        <div class="cinfo">
+          <div class="row"><div class="ic">📍</div><div><b>Workshop</b><span>Salmabad Industrial Area, Kingdom of Bahrain</span></div></div>
+          <div class="row"><div class="ic">📞</div><div><b>Call / WhatsApp</b><span>+973 1700 0000</span></div></div>
+          <div class="row"><div class="ic">✉️</div><div><b>Email</b><span>hello@oudwoodworks.bh</span></div></div>
+          <div class="row"><div class="ic">🕘</div><div><b>Hours</b><span>Sat – Thu · 8:00am – 6:00pm</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:14px"><span class="mk">O</span><span>Oud<b> Woodworks</b></span></div>
+        <p style="max-width:280px">Bespoke, handcrafted carpentry for homes across the Kingdom of Bahrain.</p>
+      </div>
+      <div><h4>Explore</h4><a onclick="show('home')">Home</a><a onclick="show('about')">About</a><a onclick="show('work')">Our Work</a><a onclick="show('contact')">Contact</a></div>
+      <div><h4>Contact</h4><p>Salmabad, Bahrain</p><p>+973 1700 0000</p><p>hello@oudwoodworks.bh</p></div>
+    </div>
+    <div class="foot-bottom">© 2026 Oud Woodworks · Kingdom of Bahrain</div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lb" onclick="this.classList.remove('show')"><span class="x">&times;</span><img id="lbimg" src="" alt=""></div>
+<a href="https://wa.me/97333801005?text=Hi%20FusionCraft%2C%20I%20saw%20this%20sample%20and%20want%20a%20website%20like%20it." class="fab" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+<a href="index.html" class="demo-tag">◂ Sample site by FusionCraft</a>
+
+<script>
+var W={
+ table:'https://images.unsplash.com/photo-1449247709967-d4461a6a6103?auto=format&fit=crop&w=1200&q=80',
+ table2:'https://images.unsplash.com/photo-1617104678098-de229db51175?auto=format&fit=crop&w=1200&q=80',
+ door:'https://images.unsplash.com/photo-1600585152220-90363fe7e115?auto=format&fit=crop&w=1200&q=80',
+ door2:'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?auto=format&fit=crop&w=1200&q=80',
+ kitchen:'https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=1200&q=80',
+ kitchen2:'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1200&q=80',
+ wardrobe:'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=1200&q=80',
+ bedroom:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80',
+ tv:'https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=1200&q=80',
+ living:'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1200&q=80',
+ stair:'https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80',
+ wood:'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=1200&q=80'
+};
+var PIECES=[
+ {name:'Dining Tables',type:'Solid oak & walnut',material:'Solid oak / walnut',finish:'Natural oil',lead:'3–4 weeks',custom:'Any size',
+  cover:W.table,desc:'Statement dining tables crafted from solid hardwood, built to your exact size and seating. Live-edge, classic or modern — finished to feel warm for decades.',
+  gallery:[W.table,W.table2,W.living,W.wood,W.kitchen,W.bedroom]},
+ {name:'Wooden Doors',type:'Interior & main doors',material:'Engineered / solid wood',finish:'Veneer / paint',lead:'2–3 weeks',custom:'CNC designs',
+  cover:W.door,desc:'Interior and main doors with clean lines or carved CNC detailing. Solid, quiet and built to fit your frames perfectly.',
+  gallery:[W.door,W.door2,W.wood,W.living,W.stair,W.table]},
+ {name:'Kitchens',type:'Bespoke cabinetry',material:'Melamine / solid wood',finish:'Matte / gloss',lead:'5–6 weeks',custom:'Full fit-out',
+  cover:W.kitchen,desc:'Full bespoke kitchens — from cabinets and islands to tall units — designed around how you cook and finished to handle daily life.',
+  gallery:[W.kitchen,W.kitchen2,W.living,W.wood,W.table,W.wardrobe]},
+ {name:'Wardrobes & Bedrooms',type:'Fitted storage & beds',material:'MDF / solid wood',finish:'Veneer / laminate',lead:'3–5 weeks',custom:'Fitted',
+  cover:W.wardrobe,desc:'Fitted wardrobes, dressing units and bed frames that use every centimetre of your room — sliding or hinged, in the finish you love.',
+  gallery:[W.wardrobe,W.bedroom,W.living,W.wood,W.kitchen,W.table]},
+ {name:'TV & Media Units',type:'Wall units & consoles',material:'Solid wood / MDF',finish:'Painted / veneer',lead:'2–3 weeks',custom:'Wall-mounted',
+  cover:W.tv,desc:'Media walls and TV consoles with hidden cable management and integrated lighting — a clean centrepiece for your living room.',
+  gallery:[W.tv,W.living,W.wood,W.table,W.kitchen,W.bedroom]},
+ {name:'Staircases',type:'Solid wood stairs & railings',material:'Solid oak / ash',finish:'Natural / stained',lead:'4–6 weeks',custom:'Custom railings',
+  cover:W.stair,desc:'Solid wood staircases and railings, hand-built and installed — a warm, sculptural feature that anchors your home.',
+  gallery:[W.stair,W.wood,W.living,W.door,W.table,W.bedroom]}
+];
+
+function card(p,i){
+  return '<div class="pcard reveal" style="transition-delay:'+((i%3)*0.08)+'s" onclick="openP('+i+')"><div class="ph"><img src="'+p.cover+'" alt="'+p.name+'"></div>'
+    +'<div class="pb"><h3 class="serif">'+p.name+'</h3><p>'+p.type+'</p>'
+    +'<div class="meta">'+p.material+' <span>· '+p.lead+'</span></div>'
+    +'<div class="view-link">View gallery →</div></div></div>';
+}
+document.getElementById('featGrid').innerHTML=PIECES.slice(0,3).map(card).join('');
+document.getElementById('allGrid').innerHTML=PIECES.map(card).join('');
+
+function openP(i){
+  var p=PIECES[i];
+  var g=p.gallery.map(function(src,idx){return '<img src="'+src+'"'+(idx===0?' class="big"':'')+' onclick="lb(\''+src+'\')" alt="">';}).join('');
+  document.getElementById('v-detail').innerHTML=
+    '<div class="detail-hero" style="background-image:linear-gradient(rgba(28,18,12,.15),rgba(28,18,12,.6)),url('+p.cover+')">'
+    +'<a class="back" onclick="show(\'work\')">← Our work</a>'
+    +'<div class="wrap"><div class="kick">'+p.type+'</div><h1 class="serif">'+p.name+'</h1></div></div>'
+    +'<section><div class="wrap">'
+    +'<div class="facts">'
+      +'<div class="fact"><div class="l">Material</div><div class="v">'+p.material+'</div></div>'
+      +'<div class="fact"><div class="l">Finish</div><div class="v">'+p.finish+'</div></div>'
+      +'<div class="fact"><div class="l">Lead time</div><div class="v">'+p.lead+'</div></div>'
+      +'<div class="fact"><div class="l">Custom</div><div class="v">'+p.custom+'</div></div>'
+    +'</div>'
+    +'<div class="split" style="align-items:start"><div><h2 class="serif" style="font-size:34px">About this work</h2><p style="color:var(--muted);font-size:16px;margin-top:14px">'+p.desc+'</p>'
+      +'<a class="btn btn-tan" style="margin-top:22px" onclick="show(\'contact\')">Request a quote</a></div>'
+      +'<div><div class="eyebrow">Gallery</div><div class="gallery">'+g+'</div></div></div>'
+    +'</div></section>';
+  show('detail');
+}
+function lb(src){document.getElementById('lbimg').src=src;document.getElementById('lb').classList.add('show');}
+
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+function animate(scope){
+  var root=scope||document;
+  root.querySelectorAll('.sec-head,.stat,.whycard,.step,.band,.fact,.gallery img,.split>*,.cinfo .row').forEach(function(el){
+    if(!el.classList.contains('reveal')&&!el.classList.contains('in')) el.classList.add('reveal');
+  });
+  root.querySelectorAll('.reveal:not(.in)').forEach(function(el){io.observe(el);});
+}
+function show(v){
+  document.querySelectorAll('.view').forEach(function(el){el.classList.toggle('active',el.id==='v-'+v);});
+  document.querySelectorAll('.nav-links a[data-v]').forEach(function(a){a.classList.toggle('active',a.dataset.v===v);});
+  var nl=document.querySelector('.nav-links'); if(nl) nl.classList.remove('open');
+  window.scrollTo(0,0);
+  requestAnimationFrame(function(){ animate(document.getElementById('v-'+v)); });
+}
+function sent(e){e.preventDefault();document.getElementById('ok').style.display='block';e.target.querySelector('button').textContent='Sent ✓';return false;}
+animate(document.getElementById('v-home'));
+</script>
+</body>
+</html>
